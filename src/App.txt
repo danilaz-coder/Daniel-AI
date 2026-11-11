@@ -1,0 +1,131 @@
+import React, { useState } from 'react';
+import { Alert, KeyboardAvoidingView, Platform, StatusBar, StyleSheet, View } from 'react-native';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+
+import BottomNav from './src/components/BottomNav';
+import TopBar from './src/components/TopBar';
+import { INITIAL_CLIENTS } from './src/data/clients';
+import { INITIAL_POSTS } from './src/data/posts';
+import ChatScreen from './src/screens/ChatScreen';
+import ClientsScreen from './src/screens/ClientsScreen';
+import FeedScreen from './src/screens/FeedScreen';
+import HelpScreen from './src/screens/HelpScreen';
+import ProfileScreen from './src/screens/ProfileScreen';
+import { COLORS } from './src/styles/colors';
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState('feed');
+  const [clients, setClients] = useState(INITIAL_CLIENTS);
+  const [posts, setPosts] = useState(INITIAL_POSTS);
+  const [chatClient, setChatClient] = useState(null);
+  const [chatText, setChatText] = useState('');
+  const [messages, setMessages] = useState({});
+  const [helpAgent, setHelpAgent] = useState('JARVIS');
+  const [helpText, setHelpText] = useState('');
+  const [helpMessages, setHelpMessages] = useState([]);
+  const [filter, setFilter] = useState('Все');
+
+  const openChat = (client) => {
+    setChatClient(client);
+    setActiveTab('clients');
+  };
+
+  const sendChatMessage = () => {
+    const text = chatText.trim();
+    if (!text || !chatClient) return;
+    setMessages((current) => ({
+      ...current,
+      [chatClient.id]: [...(current[chatClient.id] || []), { id: `${Date.now()}`, text, mine: true }],
+    }));
+    setChatText('');
+  };
+
+  const addClient = () => {
+    const client = {
+      id: `${Date.now()}`,
+      name: `Новый клиент ${clients.length - INITIAL_CLIENTS.length + 1}`,
+      company: 'Новая компания',
+      online: true,
+      unread: 0,
+      color: '#dcecff',
+    };
+    setClients((current) => [client, ...current]);
+    Alert.alert('Клиент добавлен', `${client.name} появился в списке клиентов.`);
+  };
+
+  const sendHelpMessage = () => {
+    const text = helpText.trim();
+    if (!text) return;
+    setHelpMessages((current) => [
+      ...current,
+      { id: `${Date.now()}`, text, mine: true },
+      { id: `${Date.now()}-reply`, text: `${helpAgent}: Запрос принят. Для реального ответа подключите агента через серверный Make.com webhook.`, mine: false },
+    ]);
+    setHelpText('');
+  };
+
+  const toggleLike = (postId) => {
+    setPosts((current) => current.map((post) => post.id === postId ? { ...post, likes: post.likes + 1 } : post));
+  };
+
+  let content;
+  if (chatClient) {
+    content = (
+      <ChatScreen
+        client={chatClient}
+        messages={messages[chatClient.id] || []}
+        text={chatText}
+        onChangeText={setChatText}
+        onSend={sendChatMessage}
+        onBack={() => setChatClient(null)}
+      />
+    );
+  } else if (activeTab === 'clients') {
+    content = <ClientsScreen clients={clients} onAddClient={addClient} onOpenChat={openChat} />;
+  } else if (activeTab === 'help') {
+    content = (
+      <HelpScreen
+        helpAgent={helpAgent}
+        onSelectAgent={setHelpAgent}
+        helpText={helpText}
+        onChangeHelpText={setHelpText}
+        helpMessages={helpMessages}
+        onSend={sendHelpMessage}
+      />
+    );
+  } else if (activeTab === 'profile') {
+    content = <ProfileScreen />;
+  } else {
+    content = (
+      <FeedScreen
+        clients={clients}
+        posts={posts}
+        filter={filter}
+        onChangeFilter={setFilter}
+        onToggleLike={toggleLike}
+        onNavigate={setActiveTab}
+      />
+    );
+  }
+
+  return (
+ <ThemeProvider>        {/*     */}
+    <SafeAreaProvider> 
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
+        <KeyboardAvoidingView style={styles.app} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+          <TopBar onNotificationsPress={() => Alert.alert('Уведомления', 'Новых уведомлений нет.')} />
+          <View style={styles.content}>{content}</View>
+          {!chatClient ? <BottomNav activeTab={activeTab} onSelect={setActiveTab} /> : null}
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </SafeAreaProvider>
+ </ThemeProvider>       {/*     */}
+  );
+}
+
+const styles = StyleSheet.create({
+  safeArea: { flex: 1, backgroundColor: COLORS.white },
+  app: { flex: 1, backgroundColor: COLORS.canvas },
+  content: { flex: 1 },
+});

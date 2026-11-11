@@ -1,0 +1,18 @@
+{
+  "appName": "Main Event",
+  "tabs": {
+    "feed": "Akış",
+    "clients": "Müşteriler",
+    "help": "Yardım",
+    "profile": "Profil",
+    "calc": "Hesaplama"
+  },
+  "calculatorTitle": "Hesap Makinesi",
+  "orderCalc": "Sipariş maliyeti hesaplaması",
+  "profile_menu_history_title": "Mesaj Geçmişi",
+  "profile_menu_history_desc": "Genel akış ve özel sohbetler",
+  "profile_menu_contacts_title": "Kişilerim",
+  "profile_menu_contacts_desc": "Kayıtlı müşteriler",
+  "profile_menu_settings_title": "Ayarlar",
+  "profile_menu_settings_desc": "Profil ve bildirimler"
+}

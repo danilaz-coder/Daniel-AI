@@ -1,0 +1,18 @@
+{
+  "appName": "Main Event",
+  "tabs": {
+    "feed": "Поток",
+    "clients": "Клиенты",
+    "help": "Помощь",
+    "profile": "Профиль",
+    "calc": "Расчет"
+  },
+  "calculatorTitle": "Калькулятор",
+  "orderCalc": "Расчет стоимости заказа",
+  "profile_menu_history_title": "История сообщений",
+  "profile_menu_history_desc": "Общий поток и личные чаты",
+  "profile_menu_contacts_title": "Мои контакты",
+  "profile_menu_contacts_desc": "Сохранённые клиенты",
+  "profile_menu_settings_title": "Настройки",
+  "profile_menu_settings_desc": "Профиль и уведомления"
+}

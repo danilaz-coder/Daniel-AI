@@ -1,0 +1,18 @@
+{
+  "appName": "Main Event",
+  "tabs": {
+    "feed": "फ़ीड",
+    "clients": "ग्राहक",
+    "help": "मदद",
+    "profile": "प्रोफ़ाइल",
+    "calc": "गणना"
+  },
+  "calculatorTitle": "कैलकुलेटर",
+  "orderCalc": "ऑर्डर लागत गणना",
+  "profile_menu_history_title": "संदेश इतिहास",
+  "profile_menu_history_desc": "सामान्य फ़ीड और निजी चैट",
+  "profile_menu_contacts_title": "मेरे संपर्क",
+  "profile_menu_contacts_desc": "सहेजे गए ग्राहक",
+  "profile_menu_settings_title": "सेटिंग्स",
+  "profile_menu_settings_desc": "प्रोफ़ाइल और सूचनाएं"
+}

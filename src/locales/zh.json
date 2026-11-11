@@ -1,0 +1,12 @@
+{
+  "appName": "Main Event",
+  "tabs": {
+    "feed": "动态",
+    "clients": "客户",
+    "help": "帮助",
+    "profile": "个人资料",
+    "calc": "计算"
+  },
+  "calculatorTitle": "计算器",
+  "orderCalc": "订单成本计算"
+}

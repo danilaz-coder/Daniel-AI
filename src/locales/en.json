@@ -1,0 +1,18 @@
+{
+  "appName": "Main Event",
+  "tabs": {
+    "feed": "Feed",
+    "clients": "Clients",
+    "help": "Help",
+    "profile": "Profile",
+    "calc": "Calc"
+  },
+  "calculatorTitle": "Calculator",
+  "orderCalc": "Order cost calculation",
+  "profile_menu_history_title": "Message History",
+  "profile_menu_history_desc": "General feed and private chats",
+  "profile_menu_contacts_title": "My Contacts",
+  "profile_menu_contacts_desc": "Saved clients",
+  "profile_menu_settings_title": "Settings",
+  "profile_menu_settings_desc": "Profile and notifications"
+}
